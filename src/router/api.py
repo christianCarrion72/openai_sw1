@@ -10,7 +10,13 @@ import base64
 import requests
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+    r"/*": {
+        "origins": "*",
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization", "Accept", "Origin"]
+    }
+})
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
